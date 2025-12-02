@@ -1,28 +1,33 @@
-TODO: Add more to the title of your project here
+# AdvancedR3: Advanced Reproducible Research
 
-# AdvancedR3:
+The overall aim of this workshop is to enable you to:
 
-TODO: Give a brief description of what your project is about
+-   Describe what an open, collaboration-friendly, and nearly-automated
+    reproducible data analysis pipeline and workflow looks like.
 
-This project...
+-   Design your code and analysis using simple principles and concepts
+    that allow you to write more flexible and robust code that does more
+    for less and that is friendlier to both you and your collaborators.
+
+-   Create an R project that follows these practices.
 
 # Brief description of folder and file contents
 
-TODO: As project evolves, add brief description of what is inside the
-data, docs and R folders.
-
 The following folders contain:
 
--   `data/`:
--   `docs/`:
--   `R/`:
+-   `data/`: lipidomics data from DOI: 10.5281/zenodo.6597902, Direct
+    URL: <https://zenodo.org/record/6597902>
+-   `docs/`: contains the main scientific product of the project as well
+    as all other files related to it
+-   `R/`: contains custom functions or R scripts used for this project's
+    analyses
 
 # Installing project R package dependencies
 
 If dependencies have been managed by using
 `usethis::use_package("packagename")` through the `DESCRIPTION` file,
-installing dependencies is as easy as opening the
-`AdvancedR3.Rproj` file and running this command in the console:
+installing dependencies is as easy as opening the `AdvancedR3.Rproj`
+file and running this command in the console:
 
 ```         
 # install.packages("pak")
