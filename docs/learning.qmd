@@ -27,3 +27,14 @@ lipidomics %>%
   mutate(MeanSD = glue::glue("{value_mean} ({value_sd})")) %>%
   select(Metabolite = metabolite, "Mean SD" = MeanSD)
 ```
+
+```{r}
+#' Calculate descriptive statistics of each metabolite in the dataset.
+#'
+#' @param data The lipidomics dataset.
+#'
+#' @return A data.frame/tibble.
+#'
+
+# create_table_descriptive_stats(lipidomics)
+```
