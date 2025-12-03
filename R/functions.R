@@ -46,3 +46,19 @@ clean <- function(data) {
     dplyr::ungroup()
 }
 # clean(lipidomics)
+
+
+#' Preprocessing the data
+#'
+#' @param data The lipidomics data
+#'
+#' @return a data frame
+#'
+preprocess <- function(data) {
+  data |>
+    dplyr::mutate(
+      class = as.factor(class),
+      value = scale(value)
+    )
+}
+# preprocess(lipidomics)
