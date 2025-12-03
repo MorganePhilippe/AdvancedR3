@@ -25,9 +25,9 @@ create_table_descriptive_stats <- function(data) {
 #' @return A plot object.
 
 create_plot_distributions <- function(data) {
-  ggplot2::ggplot(data, aes(x = value)) +
-    geom_histogram() +
-    facet_wrap(vars(metabolite), scales = "free") +
-    theme_minimal()
+  ggplot2::ggplot(data, ggplot2::aes(x = value)) +
+    ggplot2::geom_histogram() +
+    ggplot2::facet_wrap(ggplot2::vars(metabolite), scales = "free") +
+    ggplot2::theme_minimal()
 }
 # create_plot_distributions(lipidomics)
