@@ -71,7 +71,7 @@ preprocess <- function(data) {
 #'
 #' @returns A data frame of the results.
 #'
-fit_model <- function(data, model){
+fit_model <- function(data, model) {
   stats::glm(
     formula = model,
     data = data(),
@@ -85,3 +85,18 @@ fit_model <- function(data, model){
     )
 }
 # fit_model(lipidomics, class ~ value)
+
+#' Create model results for report.
+#'
+#' @param data The lipidomics data.
+#'
+#' @returns A data frame of model results.
+
+create_model_results <- function(data) {
+  data |>
+    dplyr::filter(metabolite == "Cholesterol") |>
+    preprocess() |>
+    fit_model(class ~ value)
+}
+
+# create_model_results(lipidomics)
