@@ -1,3 +1,9 @@
+#' Calculate descriptive statistics of each metabolite in the dataset.
+#'
+#' @param data The lipidomics dataset.
+#'
+#' @return A data.frame/tibble.
+#'
 create_table_descriptive_stats <- function(data) {
   data |>
     dplyr::group_by(metabolite) |>
@@ -9,3 +15,4 @@ create_table_descriptive_stats <- function(data) {
     dplyr::mutate(MeanSD = glue::glue("{value_mean} ({value_sd})")) |>
     dplyr::select(Metabolite = metabolite, "Mean SD" = MeanSD)
 }
+# create_table_descriptive_stats(lipidomics)
