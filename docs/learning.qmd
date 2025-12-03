@@ -27,3 +27,21 @@ lipidomics %>%
   mutate(MeanSD = glue::glue("{value_mean} ({value_sd})")) %>%
   select(Metabolite = metabolite, "Mean SD" = MeanSD)
 ```
+
+## Results: basic stats table
+
+```{r}
+tar_read(table_descriptive_stats) %>%
+  knitr::kable(
+    caption = "The mean and standard deviation of metabolites in lipidomics dataset."
+  )
+```
+
+## Plot of distribution
+
+```{r}
+ggplot(lipidomics, aes(x = value)) +
+  geom_histogram() +
+  facet_wrap(vars(metabolite), scales = "free") +
+  theme_minimal()
+```
