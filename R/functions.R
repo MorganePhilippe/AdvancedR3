@@ -7,7 +7,7 @@
 create_table_descriptive_stats <- function(data) {
   data |>
     dplyr::group_by(metabolite) |>
-    dplyr::summarise(across(value, list(mean = mean, sd = sd))) |>
+    dplyr::summarise(dplyr::across(value, list(mean = mean, sd = sd))) |>
     dplyr::mutate(dplyr::across(
       tidyselect::where(is.numeric),
       \(x) round(x, digits = 1)
@@ -41,7 +41,7 @@ create_plot_distributions <- function(data) {
 #'
 clean <- function(data) {
   data |>
-    dplyr::group_by(pick(-value)) |>
+    dplyr::group_by(dplyr::pick(-value)) |>
     dplyr::summarise(value = mean(value), .groups = "keep") |>
     dplyr::ungroup()
 }
@@ -74,12 +74,12 @@ preprocess <- function(data) {
 fit_model <- function(data, model) {
   stats::glm(
     formula = model,
-    data = data(),
+    data = data,
     family = binomial
   ) |>
     broom::tidy(exponentiate = TRUE) |>
     dplyr::mutate(
-      metabolite = unique(data()$metabolite),
+      metabolite = unique(data$metabolite),
       model = format(model),
       .before = tidyselect::everything()
     )
