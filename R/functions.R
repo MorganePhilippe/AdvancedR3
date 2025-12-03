@@ -62,3 +62,26 @@ preprocess <- function(data) {
     )
 }
 # preprocess(lipidomics)
+
+
+#' Fit the model to the data and get the results.
+#'
+#' @param data The data to fit.
+#' @param model The formula.
+#'
+#' @returns A data frame of the results.
+#'
+fit_model <- function(data, model){
+  stats::glm(
+    formula = model,
+    data = data(),
+    family = binomial
+  ) |>
+    broom::tidy(exponentiate = TRUE) |>
+    dplyr::mutate(
+      metabolite = unique(data()$metabolite),
+      model = format(model),
+      .before = tidyselect::everything()
+    )
+}
+# fit_model(lipidomics, class ~ value)

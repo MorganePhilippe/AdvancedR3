@@ -56,8 +56,8 @@ tar_read(plot_distributions)
 
 ```{r}
 lipidomics %>%
-  count(code, metabolite) %>% 
-  filter(n>1)
+  count(code, metabolite) %>%
+  filter(n > 1)
 ```
 
 ```{r}
@@ -82,8 +82,37 @@ just_cholesterol <- lipidomics |>
   preprocess()
 
 glm(
-    formula = class ~ value,
+  formula = class ~ value,
   data = just_cholesterol,
   family = binomial
-)
+) |>
+  broom::tidy(exponentiate = TRUE) |>
+  mutate(
+    metabolite = unique(just_cholesterol$metabolite),
+    model = format(class ~ value),
+    .before = everything() 
+  )
+```
+
+```{r}
+#' Fit the model to the data and get the results.
+#'
+#' @param data The data to fit.
+#' @param model The formula.
+#'
+#' @returns A data frame of the results.
+#' 
+fit_model <- function(data, model){
+stats::glm(
+  formula = model,
+  data = data(),
+  family = binomial
+) |>
+  broom::tidy(exponentiate = TRUE) |>
+  dplyr::mutate(
+    metabolite = unique(data()$metabolite),
+    model = format(model),
+    .before = tidyselect::everything() 
+  )
+}
 ```
