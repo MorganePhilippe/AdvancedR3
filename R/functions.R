@@ -31,3 +31,18 @@ create_plot_distributions <- function(data) {
     ggplot2::theme_minimal()
 }
 # create_plot_distributions(lipidomics)
+
+
+#' Do some cleaning to fix issues in the data.
+#'
+#' @param data The lipidomics data frame
+#'
+#' @return A data frame
+#'
+clean <- function(data) {
+  data |>
+    dplyr::group_by(pick(-value)) |>
+    dplyr::summarise(value = mean(value), .groups = "keep") |>
+    dplyr::ungroup()
+}
+# clean(lipidomics)
