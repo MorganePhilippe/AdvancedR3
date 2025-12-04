@@ -91,12 +91,12 @@ fit_model <- function(data, model) {
 #' @param data The lipidomics data.
 #'
 #' @returns A data frame of model results.
-
 create_model_results <- function(data) {
   data |>
-    dplyr::filter(metabolite == "Cholesterol") |>
-    preprocess() |>
-    fit_model(class ~ value)
+    dplyr::group_split(metabolite) |>
+    purrr::map(preprocess) |>
+    purrr::map(fit_all_models) |>
+    purrr::list_rbind()
 }
 
 # create_model_results(lipidomics)
