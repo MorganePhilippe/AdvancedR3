@@ -100,3 +100,20 @@ create_model_results <- function(data) {
 }
 
 # create_model_results(lipidomics)
+
+
+#' Fit all models to a given data frame.
+#'
+#' @param data The data frame to fit the models to.
+#'
+#' @returns A data frame with results from all models.
+#'
+fit_all_models <- function(data) {
+  list(
+    class ~ value,
+    class ~ value + gender + age
+  ) |>
+    purrr::map(\(model) fit_model(data, model = model)) |>
+    purrr::list_rbind()
+}
+# fit_all_models(lipidomics)
